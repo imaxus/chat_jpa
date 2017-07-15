@@ -1,0 +1,8 @@
+---
+applications:
+- name: single-room-chat
+  memory: 512M
+  host: ZTIjsChat
+  domain: mybluemix.net
+  services:
+  - JPADatabase

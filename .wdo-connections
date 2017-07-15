@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connections:connections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:connections="http://www.ibm.com/websphere/wdo/connections">
+  <connection id="Users">
+    <development xsi:type="connections:rsc-live-connection" id="Users_dev" name="Users"/>
+    <runtime xsi:type="connections:driver-manager-connection" auto-deploy="true" class-location="C:\Program Files\IBM\SQLLIB\java\db2jcc4.jar;C:\Program Files\IBM\SQLLIB\java\db2jcc_license_cu.jar" id="Users_runtime" class-name="com.ibm.db2.jcc.DB2Driver" url="jdbc:db2://bluemix05.bluforcloud.com:50000/BLUDB:retrieveMessagesFromServerOnGetMessage=true;" userid="dash113092"/>
+  </connection>
+</connections:connections>

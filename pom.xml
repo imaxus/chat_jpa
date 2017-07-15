@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>chat</groupId>
+	<artifactId>chat_tomcat</artifactId>
+	<version>0.1</version>
+	<packaging>war</packaging>
+	
+	<properties>
+	  <!-- Use the latest version whenever possible. -->
+	  <jackson.version>2.7.0</jackson.version>
+	</properties>
+	
+          
+    <dependencies>
+    	<dependency>
+		  <groupId>org.glassfish</groupId>
+		  <artifactId>javax.json</artifactId>
+		  <version>1.0.4</version>
+		</dependency>
+	    <dependency>
+		    <groupId>javax.json</groupId>
+		    <artifactId>javax.json-api</artifactId>
+		    <version>1.0</version>
+		</dependency>
+    	<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>7.0.55</version>
+            <scope>provided</scope>
+        </dependency>
+        
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.4</version>
+		</dependency>
+		
+
+    </dependencies>
+      
+    <build>
+        <finalName>chat_jpa</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                <warSourceDirectory>WebContent</warSourceDirectory>
+                <failOnMissingWebXml>true</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+	
+</project>

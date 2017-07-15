@@ -1,0 +1,139 @@
+html, body {
+	height: 100%; margin: 10px,0px,10px,0px;
+}
+
+body {
+	background-color: #e6e6e6; font-family: Helvetica; font-size: 12pt;
+}
+
+#wraper {
+	display: block; position: absolute; bottom:0; top:0; left:0; right:0; margin: 8px; 
+}
+
+#msgContainer {
+	position: absolute; top: 0px; bottom: 45px; background-color: white; width: 100%;
+}
+
+#msgContainer .msgrow {
+	background-color: #ffffff;
+	border-radius:  0px 5px 5px 0px;
+	-moz-border-radius:  0px 5px 5px 0px;
+	-webkit-border-radius:  0px 5px 5px 0px;
+	color: black;
+	margin: 2px 0px 2px 0px;
+	padding: 2px;
+	border: 0px solid;
+	display: inline-grid;
+}
+
+#msgContainer .msgrow_login {
+	background-color: #4eed5e;
+	border-radius:  0px 5px 5px 0px;
+	-moz-border-radius:  0px 5px 5px 0px;
+	-webkit-border-radius:  0px 5px 5px 0px;
+	color: black;
+	font-weight: bold;
+	margin: 5px 0px 5px 0px;
+	padding: 2px;
+	border: 0px solid;
+	display: inline-grid;
+}
+#msgContainer .msgrow_logout {
+	background-color: #ed4b4b;
+	border-radius:  0px 5px 5px 0px;
+	-moz-border-radius:  0px 5px 5px 0px;
+	-webkit-border-radius:  0px 5px 5px 0px;
+	color: black;
+	font-weight: bold;
+	margin: 5px 0px 5px 0px;
+	padding: 2px;
+	border: 0px solid;
+	display: inline-grid;
+}
+#msgController {
+	position: absolute; 
+	bottom: 0px; 
+	height: 40px; 
+	display: inline; 
+	width: 100%;
+	text-align: right;
+}
+
+#login {
+	width: 300px; 
+	padding: 5px; 
+	margin: 10px auto; 
+}
+
+#login #infoLabel {
+	color: Black;
+	text-align: center;
+}
+
+#login .loginInput {
+	color: Black;
+	width: 100%; 
+	border-radius: 6px; 
+	margin: 3px 0px;
+}
+
+#txtMsg{
+	height: 20px; 
+	width: 100%;
+}
+.msgButton {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 5px 8px 5px 8px;
+  text-decoration: none;
+  float: right;
+}
+
+.msgButton:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+.User_sender{
+	background-color: #c9e7f7;
+	border-radius:  60px 0px 0px 60px;
+	-moz-border-radius:  60px 0px 0px 60px;
+	-webkit-border-radius:  60px 0px 0px 60px;
+	border: 0px solid #000000;
+	padding: 2px;
+	min-width: 5%;
+	display: inline-grid;
+	text-align: center;
+}
+.System_sender{
+	
+	background-color: #fcf17c;
+	border-radius:  60px 0px 0px 60px;
+	-moz-border-radius:  60px 0px 0px 60px;
+	-webkit-border-radius:  60px 0px 0px 60px;
+	border: 0px solid #000000;
+	padding: 2px;
+	min-width: 5%;
+	display: inline-grid;
+	text-align: center;
+}
+.msgText{
+	background-color: #ffffff;
+	color: black;
+	margin: 5px 0px 5px 0px;
+	border: 0px solid;
+}
