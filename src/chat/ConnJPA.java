@@ -35,24 +35,25 @@ public class ConnJPA {
 		} catch (Exception e) {
 			System.out.println("Failed !!! " + e.getMessage());
 		}
+		System.out.println("[DB] user list returned");
 		return users;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void AddUser(String name) {
-		System.out.println("test0");
-		Query q1 = entityManager.createQuery("select u from User u;");//User where nick=':name';").setParameter("name", name).getSingleResult();
-		System.out.println("test1");
-		/*if(q1 ==null) {
+		List<User> q1 = null;
+		q1 =(List<User>) entityManager.createQuery("SELECT u FROM User u WHERE u.nick= :name ORDER BY u.nick").setParameter("name", name).getResultList();
+		if(q1.isEmpty()) {
 			try {
 			entityManager.getTransaction().begin();
-
+			System.out.println("test2");
 			User us = new User();
 			us.setNick(name);
-			us.setConnnumber(0);
+			us.setConnnumber(1);
 			us.setIsconnected(true);
-
+			System.out.println("test3");
 			entityManager.persist(us);
-
+			System.out.println("test4");
 			entityManager.getTransaction().commit();
 			System.out.println("[DB] dodano uzytkownika");
 			}catch(Exception e) {
@@ -60,15 +61,18 @@ public class ConnJPA {
 			}
 		}else {
 			try {
-			User tempU = (User)q1;
-			Query query = entityManager.createQuery("UPDATE users u SET u.connnumber = "+(tempU.getConnnumber()+1)+" WHERE e.nick = ':name'").setParameter("name",name);
-			int rowCount = query.executeUpdate();
+			int idc = q1.get(0).getId();
+			User tempUser = entityManager.find(User.class, idc);
+			entityManager.getTransaction().begin();
+			tempUser.setConnnumber(q1.get(0).getConnnumber()+1);
+			entityManager.getTransaction().commit();
+			//Query q2 = entityManager.createQuery("UPDATE User u SET u.connnumber = 2 WHERE u.nick = :name");
+			//int rowC = q2.setParameter("name",name).executeUpdate();
 			System.out.println("[DB] zaktualizowano uzytkownika");
 			}catch(Exception e) {
 				System.out.println("[ERROR DB] wystapil blad przy aktualizowaniu uzytkownika");
 			}
 			
-		}*/
-		entityManager.close();
+		}
 	}
 }
