@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @ServerEndpoint(value = "/chatroom",encoders = ChatMessageEncoder.class, decoders = ChatMessageDecoder.class)
 public class ChatEndpoint {
 	private Room room = Room.getRoom();
+	private ConnJPA cj;
 
 	/**
 	 * Funkcja wykonuj¹ca siê w momencie otrzymania wiadomoœci na socketcie, jeœli jest to login
@@ -49,15 +50,21 @@ public class ChatEndpoint {
 		if (chatMsg.getMessageType() == mType.login) {		
 			String nick = chatMsg.getMessage();
 			properties.put("nick", nick);
-			ConnJPA cj = new ConnJPA("PU_dashDB");
-			cj.AddUser(nick);
-			chatMsg.setMessage(nick + " do³¹czy³ do pokoju");
-			chatMsg.setMessageType(mType.login);
-			chatMsg.setSender("System");
+			boolean isLogged = cj.AddUser(nick);
 			
-			room.sendMessage(chatMsg);
-			room.join(s);
-			System.out.println("Wys³ano wiadomoœæ typu - "+chatMsg.getMessageType()+" sender "+chatMsg.getSender());
+			if(isLogged) {
+				chatMsg.setMessage(nick + " do³¹czy³ do pokoju");
+				chatMsg.setMessageType(mType.login);
+				chatMsg.setSender("System");
+				
+				room.sendMessage(chatMsg);
+				room.join(s);
+				System.out.println("Wys³ano wiadomoœæ typu - "+chatMsg.getMessageType()+" sender "+chatMsg.getSender());
+			
+			}else {
+				System.out.println("Ponowne logowanie ...");
+				
+			}
 		}
 		else if(chatMsg.getMessageType() == mType.msg) {
 			chatMsg.setSender((String)properties.get("nick"));
@@ -74,10 +81,12 @@ public class ChatEndpoint {
 	@OnOpen
 	public void onOpen(final Session s, EndpointConfig c) {
 		System.out.println("Utworzono websocket");
+		cj = new ConnJPA("PU_dashDB");
 	}
 	@OnClose
 	public void OnClose(Session s, CloseReason r) {
 		ChatMessage newMsg = new ChatMessage();
+		cj.LogoutUser((String)s.getUserProperties().get("nick"));
 		System.out.println("Zamkniêto websocket");
 		newMsg.setSender("System");
 		newMsg.setMessageType(mType.logout);
@@ -88,6 +97,7 @@ public class ChatEndpoint {
 
 	@OnError
 	public void onError(Session s, Throwable ex) {
+		cj.LogoutUser((String)s.getUserProperties().get("nick"));
 		System.out.println("Wyst¹pi³ b³¹d");
 	}
 }

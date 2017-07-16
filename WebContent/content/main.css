@@ -81,6 +81,10 @@ body {
 	height: 20px; 
 	width: 100%;
 }
+.errorMessage{
+	color : red;
+	text-align: center;
+}
 .msgButton {
   background: #3498db;
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);

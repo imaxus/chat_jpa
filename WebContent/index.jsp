@@ -33,7 +33,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			<button type="button" class="msgButton" onclick="proxy.login()">Dołącz</button>
 		</div>
 	</div>
-	
+	<%
+    if (request.getParameter("loginErr") == null) {
+        
+    } else {
+        out.println("<div id=\"loginError\" class=\"errorMessage\">Użytkownik o takim nicku jest już zalogowany</div>");
+    }
+	%>
 	<!-- message container -->
 	
 	<div id="msg" style="display: none">

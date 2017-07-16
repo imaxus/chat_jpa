@@ -40,31 +40,29 @@ public class ConnJPA {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void AddUser(String name) {
+	public boolean AddUser(String name) {
 		List<User> q1 = null;
 		q1 =(List<User>) entityManager.createQuery("SELECT u FROM User u WHERE u.nick= :name ORDER BY u.nick").setParameter("name", name).getResultList();
 		if(q1.isEmpty()) {
 			try {
 			entityManager.getTransaction().begin();
-			System.out.println("test2");
 			User us = new User();
 			us.setNick(name);
 			us.setConnnumber(1);
 			us.setIsconnected(true);
-			System.out.println("test3");
 			entityManager.persist(us);
-			System.out.println("test4");
 			entityManager.getTransaction().commit();
 			System.out.println("[DB] dodano uzytkownika");
 			}catch(Exception e) {
 				System.out.println("[ERROR DB] wystapil blad przy dodawaniu uzytkownika ");
 			}
-		}else {
+		}else if(!q1.get(0).getIsconnected()){
 			try {
 			int idc = q1.get(0).getId();
 			User tempUser = entityManager.find(User.class, idc);
 			entityManager.getTransaction().begin();
 			tempUser.setConnnumber(q1.get(0).getConnnumber()+1);
+			tempUser.setIsconnected(true);
 			entityManager.getTransaction().commit();
 			//Query q2 = entityManager.createQuery("UPDATE User u SET u.connnumber = 2 WHERE u.nick = :name");
 			//int rowC = q2.setParameter("name",name).executeUpdate();
@@ -73,6 +71,32 @@ public class ConnJPA {
 				System.out.println("[ERROR DB] wystapil blad przy aktualizowaniu uzytkownika");
 			}
 			
+		}else {
+			System.out.println("[DB] uzytkownik o tej nazwie jest juz zalogowany");
+			
+			return false;
 		}
+		return true;
+	}
+	@SuppressWarnings("unchecked")
+	public void LogoutUser(String name) {
+		try {
+		List<User> q1 = null;
+		q1 =(List<User>) entityManager.createQuery("SELECT u FROM User u WHERE u.nick= :name ORDER BY u.nick").setParameter("name", name).getResultList();
+		int idc = q1.get(0).getId();
+		User tempUser = entityManager.find(User.class, idc);
+		entityManager.getTransaction().begin();
+		tempUser.setIsconnected(false);
+		entityManager.getTransaction().commit();
+		System.out.println("[DB] wylogowano uzytkownika");
+		}catch(Exception e) {
+			System.out.println("[ERROR DB] wystapil blad przy wylogowywaniu uzytkownika");
+		}
+		CloseConnection();
+	}
+	
+	private void CloseConnection() {
+		entityManager.close();
+		managerFactory.close();
 	}
 }
