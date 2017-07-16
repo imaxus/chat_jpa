@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="content/main.css">
 <script type="text/javascript" src="scripts/chatroom.js"></script>
 <script type="text/javascript">
+//var wsUri = "wss://chatjpa.mybluemix.net/chatroom";
 var wsUri = "ws://localhost:9080/chat_jpa/chatroom";
 var proxy = CreateProxy(wsUri);
 
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	console.log(document.getElementById('login'));
 	proxy.initiate({
 		login: document.getElementById('login'),
+		loginError: document.getElementById('loginError'),
 		msg: document.getElementById('msg'),
 		txtMsg: document.getElementById('txtMsg'),
 		txtLogin: document.getElementById('txtLogin'),
@@ -33,13 +35,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			<button type="button" class="msgButton" onclick="proxy.login()">Dołącz</button>
 		</div>
 	</div>
-	<%
-    if (request.getParameter("loginErr") == null) {
-        
-    } else {
-        out.println("<div id=\"loginError\" class=\"errorMessage\">Użytkownik o takim nicku jest już zalogowany</div>");
-    }
-	%>
+	<div id="loginError" class="errorMessage">Użytkownik o takim nicku jest już zalogowany</div>
 	<!-- message container -->
 	
 	<div id="msg" style="display: none">

@@ -1,10 +1,8 @@
-var showErrorLogin = function(){
-	elements.loginError.style.display = "block";
-};
 var CreateProxy = function(wsUri) {
 	var websocket = null;
 	var audio = null;
 	var elements = null;
+
 	
 	var showMsgPanel = function() {
 			elements.login.style.display = "none";
@@ -12,7 +10,11 @@ var CreateProxy = function(wsUri) {
 			elements.loginError.style.display = "none";
 			elements.txtMsg.focus();
 	};
-			
+	
+	var showErrorLogin = function(){
+		elements.loginError.style.display = "block";
+	};
+	
 	var hideMsgPanel = function() {
 			elements.login.style.display = "block";
 			elements.msg.style.display = "none";
@@ -75,13 +77,19 @@ var CreateProxy = function(wsUri) {
 		    	websocket = new WebSocket(wsUri);
 		    	
 		    	websocket.onopen = function() {
-		    		
 		    		var message = { messageType: 'login', message: name, sender: "System" };
 		    		websocket.send(JSON.stringify(message));
 		        };
 		        websocket.onmessage = function(e) {
-		        	displayMessage(e);
-		        	showMsgPanel();
+		        	var msg_dec = JSON.parse(e.data);
+		        	if(msg_dec.messageType == "error"){
+			        	clearMessage();
+			        	elements.loginError.style.display = "block";
+			        	websocket = null;
+		        	}else{
+				        displayMessage(e);
+				        showMsgPanel();
+		        	}
 		        };
 		        websocket.onerror = function(e) {
 		        	
@@ -128,6 +136,7 @@ var CreateProxy = function(wsUri) {
 		initiate: function(e) {
 			elements = e;
 			elements.txtLogin.focus();
+			elements.loginError.style.display = "none";
 		}
 	}
 };

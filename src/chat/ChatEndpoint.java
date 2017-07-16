@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.websocket.CloseReason;
+import javax.websocket.EncodeException;
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -62,8 +63,15 @@ public class ChatEndpoint {
 				System.out.println("Wys³ano wiadomoœæ typu - "+chatMsg.getMessageType()+" sender "+chatMsg.getSender());
 			
 			}else {
+				chatMsg.setMessage("uzytkownik jest juz zalogowany");
+				chatMsg.setMessageType(mType.error);
+				chatMsg.setSender("System");
+				try {
+					s.getBasicRemote().sendObject(chatMsg);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				System.out.println("Ponowne logowanie ...");
-				
 			}
 		}
 		else if(chatMsg.getMessageType() == mType.msg) {
@@ -75,7 +83,6 @@ public class ChatEndpoint {
 			chatMsg.setSender("System");
 			room.sendMessage(chatMsg);
 		}
-		System.out.println("Wys³ano wiadomoœæ typu : "+chatMsg.getMessageType());
 	}
 
 	@OnOpen

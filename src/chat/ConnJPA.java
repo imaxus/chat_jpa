@@ -38,7 +38,6 @@ public class ConnJPA {
 		System.out.println("[DB] user list returned");
 		return users;
 	}
-	
 	@SuppressWarnings("unchecked")
 	public boolean AddUser(String name) {
 		List<User> q1 = null;
@@ -72,8 +71,8 @@ public class ConnJPA {
 			}
 			
 		}else {
-			System.out.println("[DB] uzytkownik o tej nazwie jest juz zalogowany");
 			
+			System.out.println("[DB] uzytkownik o tej nazwie jest juz zalogowany");
 			return false;
 		}
 		return true;
@@ -95,7 +94,7 @@ public class ConnJPA {
 		CloseConnection();
 	}
 	
-	private void CloseConnection() {
+	public void CloseConnection() {
 		entityManager.close();
 		managerFactory.close();
 	}

@@ -9,8 +9,8 @@ package chat;
 public enum mType { 
     login("login"),
     msg("msg"),
-    logout("logout");
-	
+    logout("logout"),
+	error("error");
 	private final String text;
 	
     private mType(final String text) {
