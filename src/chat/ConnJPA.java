@@ -9,6 +9,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.jcabi.aspects.Loggable;
+
 import chat.User;
 
 public class ConnJPA {
@@ -38,6 +40,7 @@ public class ConnJPA {
 		System.out.println("[DB] user list returned");
 		return users;
 	}
+	@Loggable
 	@SuppressWarnings("unchecked")
 	public boolean AddUser(String name) {
 		List<User> q1 = null;
@@ -77,6 +80,7 @@ public class ConnJPA {
 		}
 		return true;
 	}
+	@Loggable
 	@SuppressWarnings("unchecked")
 	public void LogoutUser(String name) {
 		try {

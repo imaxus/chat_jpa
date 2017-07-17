@@ -14,8 +14,18 @@
 	  <jackson.version>2.7.0</jackson.version>
 	</properties>
 	
-          
+      <repositories>
+	  <repository>
+	    <id>oss.sonatype.org</id>
+	    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+	  </repository>
+	</repositories>   
     <dependencies>
+     <dependency>
+    <groupId>com.jcabi</groupId>
+    <artifactId>jcabi-aspects</artifactId>
+    <version>0.22.6</version>
+  </dependency>
     	<dependency>
 		  <groupId>org.glassfish</groupId>
 		  <artifactId>javax.json</artifactId>
