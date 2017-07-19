@@ -18,7 +18,9 @@ public class ChatMessageEncoder implements Encoder.Text<ChatMessage> {
 	@Override
 	public void destroy() {
 	}
- 
+	 /**
+	  * Funkcja koduj¹ca wiadomoœæ z obiektu ChatMessage do formatu JSON
+	  */
 	@Override
 	public String encode(final ChatMessage chatMessage) throws EncodeException {
 		return Json.createObjectBuilder()

@@ -1,7 +1,8 @@
 package chat;
 
 /**
- * Obiekt wiadomoœci, zawiera typ oraz tekst wiadomoœci
+ * Obiekt wiadomoœci, zawiera typ, tekst wiadomoœci oraz wysy³ajacego,
+ *  mo¿e byæ to u¿ytkownik lub system
  * @author mina
  *
  */

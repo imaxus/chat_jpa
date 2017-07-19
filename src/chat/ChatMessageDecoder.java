@@ -10,7 +10,7 @@ import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
  
 /**
- * Klasa dekoduj¹ca obiekty z json do ChatMessage w celu wyœietlenia przy pomocy html/js
+ * Klasa dekoduj¹ca obiekty z json do ChatMessage w celu przes³ania i wyœietlenia przy pomocy html/js
  * @author mina
  *
  */
@@ -22,7 +22,9 @@ public class ChatMessageDecoder implements Decoder.Text<ChatMessage> {
 	@Override
 	public void destroy() {
 	}
- 
+ /**
+  * Funkcja dekodujaca wiadomoœæ z formatu JSON do obiektu ChatMessage
+  */
 	@Override
 	public ChatMessage decode(final String textMessage) throws DecodeException {
 		ChatMessage chatMessage = new ChatMessage();

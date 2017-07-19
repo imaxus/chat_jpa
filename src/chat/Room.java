@@ -27,7 +27,7 @@ public class Room {
 	
 	/**
 	 *  Wys³anie wiadomoœci do wszystkich u¿ytkowników pod³¹czonych do pokoju
-	 * @param message
+	 * @param message obiekt wiadomoœci do przes³ania wszystkim u¿ytkownikom
 	 */
 	public synchronized void sendMessage(final ChatMessage msg) {
 		for (Session cuser: connectedUsers) {
@@ -44,7 +44,7 @@ public class Room {
 	
 	/**
 	 * Dodanie u¿ytkownika do pokoju
-	 * @param session
+	 * @param session sesja po³¹czenia danego u¿ytkownika
 	 */
 	public synchronized void join(Session s) { 
 		connectedUsers.add(s); 

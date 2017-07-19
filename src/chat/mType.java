@@ -1,8 +1,11 @@
 package chat;
 
 /**
- * Zawiera rodzaje wiadomoœci. Dostêpne dwie : wiadomoœæ tekstowa i wiadomoœæ 
- * o zalogowaniu innego u¿ytkownika.
+ * Zawiera rodzaje wiadomoœci. Dostêpne cztery :
+ * - wiadomoœæ tekstowa
+ * - wiadomoœæ o zalogowaniu innego u¿ytkownika.
+ * - wiadomoœæ o wylogowaniu innego u¿ytkownika
+ * - wiadomoœæ o b³êdzie
  * @author mina
  *
  */

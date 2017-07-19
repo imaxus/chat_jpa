@@ -1,5 +1,6 @@
 package chat;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,14 +13,27 @@ import javax.persistence.Query;
 import com.jcabi.aspects.Loggable;
 
 import chat.User;
-
+import logger.LoggerSetup;
+/**
+ * Klasa odpowiedzialna za obs³ugê ¿¹dañ wysy³anych do bazy danych
+ * @author mina
+ *
+ */
 public class ConnJPA {
 	private String punitName;
 	private EntityManagerFactory managerFactory; 
 	private EntityManager entityManager; 
 	private EntityTransaction entityTransaction;
-	
+	/**
+	 * Konstruktor 
+	 * @param persistenceUnitName nazwa jednostki z pliku konfiguracyjnego persistance.xml
+	 */
 	public ConnJPA(String persistenceUnitName) {
+		//ustawienie loggera
+		try {
+			LoggerSetup.setup();
+		} catch (IOException e) {
+		}
 		System.out.println("[DB] przygotowywanie po³¹czenia ... ");
 		punitName = persistenceUnitName;
 		managerFactory = Persistence.createEntityManagerFactory(persistenceUnitName);
@@ -28,6 +42,10 @@ public class ConnJPA {
 		System.out.println("[DB] utworzono po³¹czenie z baz¹ danych! ");
 	}
 	
+	/**
+	 * Funkcja pobieraj¹ca pe³n¹ listê u¿ytkowników z bazy danych
+	 * @return lista u¿ytkowników
+	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getPersonList() {
 		List<User> users = null;
@@ -40,7 +58,13 @@ public class ConnJPA {
 		System.out.println("[DB] user list returned");
 		return users;
 	}
-	@Loggable
+	/**
+	 * Funkcja loguj¹ca u¿ytkownika do bazy danych, jeœli u¿ytkownika nie ma w bazie to dostaje dodany,
+	 * jeœli istnieje w bazie danych to jest zwiêkszany licznik zalogowañ i wartoœæ logiczna okreœlaj¹ca
+	 * czy dany u¿ytkownik, jest aktualnie zalogowany.
+	 * @param name Nazwa u¿ytkownika
+	 * @return zwraca true jeœli pomyœlnie zalogowano u¿ytkownika, w przeciwnym razie false
+	 */
 	@SuppressWarnings("unchecked")
 	public boolean AddUser(String name) {
 		List<User> q1 = null;
@@ -80,7 +104,11 @@ public class ConnJPA {
 		}
 		return true;
 	}
-	@Loggable
+	/**
+	 * Funkcja wylogowuj¹ca u¿ytkownika, zmienia wartoœæ logiczna w bazie okreœlaj¹c¹ czy u¿ytkownik jest 
+	 * aktualnie zalogowany
+	 * @param name Nazwa u¿ytkownika
+	 */
 	@SuppressWarnings("unchecked")
 	public void LogoutUser(String name) {
 		try {
@@ -97,7 +125,9 @@ public class ConnJPA {
 		}
 		CloseConnection();
 	}
-	
+	/**
+	 * Zamkniêcie po³¹czenia
+	 */
 	public void CloseConnection() {
 		entityManager.close();
 		managerFactory.close();

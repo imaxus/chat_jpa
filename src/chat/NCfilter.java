@@ -11,12 +11,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
     
 /**
- * Zapobiega cache'owaniu, ¿eby zawsze po zamkniêciu strony trzeba by³o siê zalogowac ponownie
+ * Zapobiega cache'owaniu, ¿eby zawsze po zamkniêciu strony trzeba by³o siê zalogowac ponownie,
+ * równie¿ po otwarciu nowej karty, trzeba siê zalogowaæ od nowa.
  * @author mina
  *
  */
 public class NCfilter implements Filter {
     
+	/**
+	 * Funkcja bêd¹ca filtrem przeciw cache'owaniu
+	 */
     public void doFilter(ServletRequest request, ServletResponse sresponse, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse)sresponse;
         

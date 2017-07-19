@@ -9,7 +9,7 @@
 <script type="text/javascript" src="scripts/chatroom.js"></script>
 <script type="text/javascript">
 //var wsUri = "wss://chatjpa.mybluemix.net/chatroom";
-var wsUri = "ws://localhost:9080/chat_jpa/chatroom";
+var wsUri = "wss://chatjpa.mybluemix.net/chatroom";
 var proxy = CreateProxy(wsUri);
 
 document.addEventListener("DOMContentLoaded", function(event) {

@@ -4,7 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * Klasa dwzorowuj¹ca encjê z bazy danych
+ * Klasa dwzorowuj¹ca encjê z bazy danych, 
+ * zawieraj¹ca odpowiednie pola oraz gettery i settery.
  * 
  */
 @Entity
