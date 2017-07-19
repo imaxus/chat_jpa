@@ -14,18 +14,29 @@ import com.jcabi.aspects.Loggable;
 
 import chat.User;
 import logger.LoggerSetup;
+
 /**
- * Klasa odpowiedzialna za obs³ugê ¿¹dañ wysy³anych do bazy danych
- * @author mina
+ * Klasa odpowiedzialna za obs³ugê ¿¹dañ wysy³anych do bazy danych.
  *
+ * @author mina
  */
 public class ConnJPA {
+	
+	/** The punit name. */
 	private String punitName;
+	
+	/** The manager factory. */
 	private EntityManagerFactory managerFactory; 
+	
+	/** The entity manager. */
 	private EntityManager entityManager; 
+	
+	/** The entity transaction. */
 	private EntityTransaction entityTransaction;
+	
 	/**
-	 * Konstruktor 
+	 * Konstruktor .
+	 *
 	 * @param persistenceUnitName nazwa jednostki z pliku konfiguracyjnego persistance.xml
 	 */
 	public ConnJPA(String persistenceUnitName) {
@@ -43,7 +54,8 @@ public class ConnJPA {
 	}
 	
 	/**
-	 * Funkcja pobieraj¹ca pe³n¹ listê u¿ytkowników z bazy danych
+	 * Funkcja pobieraj¹ca pe³n¹ listê u¿ytkowników z bazy danych.
+	 *
 	 * @return lista u¿ytkowników
 	 */
 	@SuppressWarnings("unchecked")
@@ -104,9 +116,11 @@ public class ConnJPA {
 		}
 		return true;
 	}
+	
 	/**
 	 * Funkcja wylogowuj¹ca u¿ytkownika, zmienia wartoœæ logiczna w bazie okreœlaj¹c¹ czy u¿ytkownik jest 
-	 * aktualnie zalogowany
+	 * aktualnie zalogowany.
+	 *
 	 * @param name Nazwa u¿ytkownika
 	 */
 	@SuppressWarnings("unchecked")
@@ -125,8 +139,9 @@ public class ConnJPA {
 		}
 		CloseConnection();
 	}
+	
 	/**
-	 * Zamkniêcie po³¹czenia
+	 * Zamkniêcie po³¹czenia.
 	 */
 	public void CloseConnection() {
 		entityManager.close();
